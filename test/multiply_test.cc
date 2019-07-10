@@ -412,6 +412,9 @@ template <class Routine> void TestMultiplyBias(Index A_rows, Index width, Index 
 
   Routine::Multiply(A_prep.begin(), B_prep.begin(), A_rows, width, B_cols, callbacks::UnquantizeAndAddBiasAndWrite(unquant_mult, bias.begin(), test_C.begin()));
 
+  // You can also pipeline callbacks...
+  // Routine::Multiply(A_prep.begin(), B_prep.begin(), A_rows, width, B_cols, callbacks::Unquantize(unquant_mult), callbacks::AddBias(bias.begin()), callbacks::Write(test_C.begin()));
+
   AlignedVector<Integer> B_quant(B.size());
   Routine::Quantize(B.begin(), B_quant.begin(), quant_mult, B.size());
   AlignedVector<float> slowint_C(test_C.size());

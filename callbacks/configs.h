@@ -6,6 +6,24 @@ namespace callbacks {
 struct Dummy {
 };
 
+struct Unquantize {
+  float unquant_mult;
+
+  Unquantize(float unquant_mult) : unquant_mult(unquant_mult) {}
+};
+
+struct Write {
+  float* addr;
+
+  Write(float* addr) : addr(addr) {}
+};
+
+struct AddBias {
+  const float* bias_addr;
+
+  AddBias(const float* bias_addr) : bias_addr(bias_addr) {}
+};
+
 struct UnquantizeAndWrite {
   float unquant_mult;
   float* addr;
